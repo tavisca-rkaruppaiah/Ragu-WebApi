@@ -1,7 +1,5 @@
 pipeline {
 	agent any 
-	
-	
 	parameters{
 		string(name: 'BUILD_PATH',defaultValue: 'WebApi.sln',description:'enter solution name')
 		string(name: 'IMAGE_NAME',defaultValue: 'raguapiimage',description:'enter image name')
@@ -9,8 +7,6 @@ pipeline {
         password(name: 'PASSWORD',defaultValue: 'enter dockerhub Password',description:'enter dockerhub Password')
         string(name: 'TAG_NAME',defaultValue: 'Enter tag  name',description:'Enter tag  name')
 	}
-
-	
     stages {
         stage('Build') {
             steps {
@@ -41,19 +37,19 @@ pipeline {
                 powershell(script: 'docker build -t ${env:IMAGE_NAME} ./WebApi')
             }
         }
-        stage('Login'){
+        stage('Login to Docker'){
             steps{
                 powershell(script: 'docker login -u ${env:USER_NAME} -p ${env:PASSWORD}');
             }
         }
-        stage('Tagging image'){
+        stage('Create TagName'){
             steps{
                 powershell(script: 'docker tag ${env:IMAGE_NAME}:latest imra35/ragu-api:${env:TAG_NAME}')
             }
         }
-        stage('Pushing Image'){
+        stage('Pushing Image to Docker'){
             steps{
-                powershell(script: 'docker push mattapalliswarnesh/my_api:${env:TAG_NAME}')
+                powershell(script: 'docker push imra35/ragu_api:${env:TAG_NAME}')
             }
         }
 	
