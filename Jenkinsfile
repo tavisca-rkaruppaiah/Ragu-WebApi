@@ -1,10 +1,10 @@
 pipeline {
 	agent any 
 	parameters{
-		string(name: 'BUILD_PATH',defaultValue: 'WebApi.sln',description:'enter solution name')
-		string(name: 'IMAGE_NAME',defaultValue: 'raguapiimage',description:'enter image name')
-        	string(name: 'USER_NAME',defaultValue: 'Enter dockerhub user name',description:'Enter dockerhub user name')
-        	password(name: 'PASSWORD',defaultValue: 'enter dockerhub Password',description:'enter dockerhub Password')
+		string(name: 'BUILD_PATH',defaultValue: '',description:'enter solution name')
+		string(name: 'IMAGE_NAME',defaultValue: '',description:'enter image name')
+        	string(name: 'USER_NAME',defaultValue: 'username',description:'Enter dockerhub user name')
+        	password(name: 'PASSWORD',defaultValue: 'password',description:'enter dockerhub Password')
         	string(name: 'TAG_NAME',defaultValue: 'Enter tag  name',description:'Enter tag  name')
 	}
     	stages {
