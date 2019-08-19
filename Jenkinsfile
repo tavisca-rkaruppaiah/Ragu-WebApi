@@ -10,20 +10,20 @@ pipeline {
     	stages {
         	stage('Build') {
             		steps {
-		    		powershell(script: 'dotnet build ${env:BUILD_PATH}.sln')
-            			powershell(script: "echo Building........")
+		    		powershell('dotnet build ${env:BUILD_PATH}.sln')
+            			powershell("echo Building........")
             		}
         	}
 		stage('Test') {
             		steps {
-                		powershell(script: 'dotnet test')
-                		powershell(script: "echo Testing.......")
+                		powershell('dotnet test')
+                		powershell("echo Testing.......")
             		}
         	}
 		stage('Publish') {
             		steps {
-                		powershell(script: 'dotnet publish -c Release -o ../publish')
-                		powershell(script: "echo Testing..........")
+                		powershell('dotnet publish -c Release -o ../publish')
+                		powershell( "echo Testing..........")
             		}
         	}
         	stage('Zip the Project'){
@@ -33,22 +33,22 @@ pipeline {
         	}
         	stage('Build Docker'){
             		steps{
-                		powershell(script: 'docker build -t ${env:IMAGE_NAME} .')
+                		powershell('docker build -t ${env:IMAGE_NAME} .')
             		}
         	}
         	stage('Login to Docker'){
             		steps{
-                		powershell(script: 'docker login -u ${env:USER_NAME} -p ${env:PASSWORD}');
+                		powershell('docker login -u ${env:USER_NAME} -p ${env:PASSWORD}');
             		}
         	}
         	stage('Create TagName'){
             		steps{
-                		powershell(script: 'docker tag ${env:IMAGE_NAME}:latest imra35/ragu_api:${env:TAG_NAME}')
+                		powershell('docker tag ${env:IMAGE_NAME}:latest imra35/ragu_api:${env:TAG_NAME}')
             		}
         	}
         	stage('Pushing Image to Docker'){
             		steps{
-                		powershell(script: 'docker push imra35/ragu_api:${env:TAG_NAME}')
+                		powershell('docker push imra35/ragu_api:${env:TAG_NAME}')
             		}
         	}
 	
