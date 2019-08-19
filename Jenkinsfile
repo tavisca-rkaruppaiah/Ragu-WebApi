@@ -7,7 +7,7 @@ pipeline {
     string(name: 'PORT',defaultValue: 'Enter port  number',description:'Which port you want to run')
   }
   stages {
-        stage('Pull') {
+        stage('Pull from Docker') {
             steps {
                     powershell(script: 'docker pull ${env:USER_NAME}/${env:REPOSITORY_NAME}:${env:TAG_NAME}')
                     powershell(script: "echo pulling........")
