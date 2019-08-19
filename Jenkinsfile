@@ -43,7 +43,7 @@ pipeline {
         	}
         	stage('Create TagName'){
             		steps{
-                		powershell(script: 'docker tag ${env:IMAGE_NAME}:latest imra35/ragu-api:${env:TAG_NAME}')
+                		powershell(script: 'docker tag ${env:IMAGE_NAME}:latest imra35/ragu_api:${env:TAG_NAME}')
             		}
         	}
         	stage('Pushing Image to Docker'){
