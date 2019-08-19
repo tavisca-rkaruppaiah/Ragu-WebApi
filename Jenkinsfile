@@ -26,14 +26,14 @@ pipeline {
                 		powershell(script: "echo Testing..........")
             		}
         	}
-        	stage('zip'){
+        	stage('Zip the Project'){
             		steps{
                 		archiveArtifacts artifacts: 'publish/*.*', fingerprint: true
             		}
         	}
         	stage('Build Docker'){
             		steps{
-                		powershell(script: 'docker build -t ${env:IMAGE_NAME} ./WebApi')
+                		powershell(script: 'docker build -t ${env:IMAGE_NAME} .')
             		}
         	}
         	stage('Login to Docker'){
