@@ -14,11 +14,21 @@ pipeline {
                         powershell("echo Building........")
                     }
             }
+            stage('Sonaqube Begin'){
+                steps{
+                    powershell( 'dotnet C:/Users/rkaruppaiah/Downloads/sonar-scanner-msbuild-4.6.2.2108-netcoreapp2.0/SonarScanner.MSBuild.exe begin /k:"WebApi" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="72275f1554693b285a63b0619970566c500cb5ef"')
+                }
+            }
         stage('Test') {
                     steps {
                         powershell('dotnet test')
                         powershell("echo Testing.......")
                     }
+            }
+            stage('Sonaqube End'){
+                steps{
+                    powershell( 'dotnet C:/Users/rkaruppaiah/Downloads/sonar-scanner-msbuild-4.6.2.2108-netcoreapp2.0/SonarScanner.MSBuild.exe end /d:sonar.login="72275f1554693b285a63b0619970566c500cb5ef"')
+                }
             }
         stage('Publish') {
                     steps {
