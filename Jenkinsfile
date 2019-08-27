@@ -31,7 +31,7 @@ pipeline {
             }
             stage('Build Docker'){
                 steps{
-                        powershell('docker build -t ${env:IMAGE_NAME} .')
+                        powershell('docker build -t ${env:SOLUTION_NAME} .')
                 }
             }
             stage('Login to Docker'){
