@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.2-aspnetcore-runtime-nanoserver-1803 AS base
-COPY ./publish .
-ARG SOLUTION_NAME = "Default"
-ENTRYPOINT ["dotnet", "${SOLUTION_NAME}.dll"]
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
+WORKDIR /app
+COPY --from=publish /app .
+ENTRYPOINT ["dotnet", "WebApi.dll"]
