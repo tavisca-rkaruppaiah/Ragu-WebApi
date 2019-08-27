@@ -43,10 +43,10 @@ pipeline {
             stage('Create TagName'){
                 steps{
                         powershell("echo Creating TagName....")
-                        powershell('docker tag ${env:IMAGE_NAME}:latest {env.USER_NAME}/${env:IMAGE_NAME}:${env:TAG_NAME}')
+                        powershell('docker tag ${env:IMAGE_NAME}:latest ${env.USER_NAME}/${env:IMAGE_NAME}:${env:TAG_NAME}')
                         powershell("echo TagName Created.")
                         powershell("Pushing to docker")
-                        powershell('docker push {env.USER_NAME}/${env:IMAGE_NAME}:${env:TAG_NAME}')
+                        powershell('docker push ${env.USER_NAME}/${env:IMAGE_NAME}:${env:TAG_NAME}')
                         powershell("echo Successfully Pushed")
                 }
             }
