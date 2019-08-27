@@ -46,7 +46,7 @@ pipeline {
                         powershell('docker tag ${env:IMAGE_NAME}:latest ${env:USER_NAME}/${env:IMAGE_NAME}:${env:TAG_NAME}')
                         powershell("echo TagName Created.")
                         powershell("echo Pushing to docker")
-                        powershell('docker push ${env.USER_NAME}/${env:IMAGE_NAME}:${env:TAG_NAME}')
+                        powershell('docker push ${env:USER_NAME}/${env:IMAGE_NAME}:${env:TAG_NAME}')
                         powershell("echo Successfully Pushed")
                 }
             }
