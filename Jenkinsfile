@@ -43,17 +43,17 @@ pipeline {
             stage('Create TagName'){
                 steps{
                         powershell("echo Creating TagName....")
-                        powershell('docker tag ${env:IMAGE_NAME}:latest imra35/${env:IMAGE_NAME}:${env:TAG_NAME}')
+                        powershell('docker tag ${env:IMAGE_NAME}:latest ${env.USER_NAME}/${env:IMAGE_NAME}:${env:TAG_NAME}')
                         powershell("echo TagName Created.")
-                        powershell("Pushing to docker")
-                        powershell('docker push imra35/${env:IMAGE_NAME}:${env:TAG_NAME}')
+                        powershell("echo Pushing to docker")
+                        powershell('docker push ${env.USER_NAME}/${env:IMAGE_NAME}:${env:TAG_NAME}')
                         powershell("echo Successfully Pushed")
                 }
             }
             stage('Pull') {
                 steps {
                     powershell('echo project pulling')
-                    powershell('docker pull imra35/${env:IMAGE_NAME}:${env:TAG_NAME}')
+                    powershell('docker pull ${env.USER_NAME}/${env:IMAGE_NAME}:${env:TAG_NAME}')
                     powershell("echo Successfully Pull")
                 }
             }
