@@ -10,16 +10,16 @@ pipeline {
         stages {
             stage('Build') {
                     steps {
-                        powershell("Building........")
+                        powershell("echo Building........")
                         powershell('dotnet build ${env:SOLUTION_NAME}.sln')
-                        powershell("Building........")
+                        powershell("echo Build Completed")
                     }
             }
             stage('Test') {
                 steps {
-                    powershell("Testing ....")
+                    powershell("echo Testing ....")
                     powershell('dotnet test')
-                    powershell("Tested")
+                    powershell("echo Tested")
                 }
             }
             stage('Sonaqube Begin'){
@@ -34,9 +34,9 @@ pipeline {
             }
             stage('Publish') {
                 steps {
-                    powershell("Publishing ... ")
+                    powershell("echo Publishing ... ")
                     powershell('dotnet publish -c Release -o ../publish')
-                    powershell( "Published")
+                    powershell("echo Published")
                 }
             }
             stage('Build Docker'){
@@ -51,12 +51,12 @@ pipeline {
             }
             stage('Create TagName'){
                 steps{
-                        powershell("Creating TagName....")
+                        powershell("echo Creating TagName....")
                         powershell('docker tag ${env:IMAGE_NAME}:latest {env.USER_NAME}/${env:IMAGE_NAME}:${env:TAG_NAME}')
-                        powershell("TagName Created.")
+                        powershell("echo TagName Created.")
                         powershell("Pushing to docker")
                         powershell('docker push {env.USER_NAME}/${env:IMAGE_NAME}:${env:TAG_NAME}')
-                        powershell("Successfully Pushed")
+                        powershell("echo Successfully Pushed")
                 }
             }
     }
