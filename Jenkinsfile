@@ -33,7 +33,7 @@ pipeline {
             stage('Build Docker'){
                 steps{
                         powershell('docker build -t ${env:IMAGE_NAME} .')
-                        powershell('docker build --build-arg DLL_NAME=${env:DLL_NAME} .')
+                        powershell('docker build --build-arg DLL_FILE=${env:DLL_NAME} .')
                         powershell('echo dll name passed')
                 }
             }
