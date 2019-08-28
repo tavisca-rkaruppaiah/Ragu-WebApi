@@ -36,10 +36,12 @@ pipeline {
                 }
             }
             stage('Login to Docker'){
-                withCredentials([usernamePassword(credentialsId: 'docker',  usernameVariable: 'username', passwordVariable: 'password')]) {                    
+                steps{
+                    withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'password', usernameVariable: 'username')]) {                    
                         powershell ( 'echo Docker login')
                         powershell ( 'docker login -u %username% -p %password% ' )      
-                    } 
+                    }   
+                }
             }
             stage('Create TagName'){
                 steps{
