@@ -20,10 +20,11 @@ pipeline {
             stage('SonarQube') {
                 steps {
                     powershell('echo SonarQube Executing')
+			def sqScannerMsBuildHome = tool 'SonarScanner'
                     withSonarQubeEnv ('SonarQubeServer'){
 			withCredentials([usernamePassword(credentialsId: '1655b59e-d5c6-4a4f-aad5-811cc94b3c04', usernameVariable: 'username', passwordVariable: 'password' )]){
-                            bat ('dotnet %SonarScanner%/SonarScanner.MSBuild.dll begin /key:%JOB_KEY% /d:sonar.login=%username% /d:sonar.password=%password%')
-                            bat ('dotnet %SonarScanner%/SonarScanner.MSBuild.dll end /d:sonar.login=%username% /d:sonar.password=%password%')
+				bat ('dotnet ${SonarScanner}/SonarScanner.MSBuild.dll begin /key:%JOB_KEY% /d:sonar.login=%username% /d:sonar.password=%password%')
+				bat ('dotnet ${SonarScanner}/SonarScanner.MSBuild.dll end /d:sonar.login=%username% /d:sonar.password=%password%')
                         }
                     }
                 }
