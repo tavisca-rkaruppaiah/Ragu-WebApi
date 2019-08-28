@@ -22,12 +22,9 @@ pipeline {
                    script{
 			def sqScannerMsBuildHome = tool 'SonarqubeScanner'
 			withSonarQubeEnv ('SonarQubeServer'){
-				withCredentials([usernamePassword(credentialsId: '1655b59e-d5c6-4a4f-aad5-811cc94b3c04', passwordVariable: 'password', usernameVariable: 'username')]){
-					bat 'dotnet ${sqScannerMsBuildHome}% begin /key:${env:JOB_KEY} /d:sonar.login=%username% /d:sonar.password=%password%'
-					bat 'dotnet ${sqScannerMsBuildHome} end /d:sonar.login=%username% /d:sonar.password=%password%'
-						}
-					}
-				}
+				bat "${sqScannerMsBuildHome}\\SonarQube.Scanner.MSBuild.dll begin /k:${env:JOB_KEY}"
+      				bat "${sqScannerMsBuildHome}\\SonarQube.Scanner.MSBuild.dll end"
+			}
                 }
             }
             stage('Test') {
