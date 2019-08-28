@@ -1,12 +1,12 @@
 pipeline {
     agent any 
     parameters{
-        string(name: 'SOLUTION_NAME',defaultValue: '',description:'enter solution name')
-        string(name: 'IMAGE_NAME',defaultValue: '',description:'enter image name')
-        string(name: 'USER_NAME',defaultValue: 'username',description:'Enter dockerhub user name')
-        password(name: 'PASSWORD',defaultValue: 'password',description:'enter dockerhub Password')
-        string(name: 'TAG_NAME',defaultValue: 'Enter tag  name',description:'Enter tag  name')
-        string(name: 'PORT',defaultValue: '1234',description:'Which Port You want to run')
+        string(name: 'SOLUTION_NAME', defaultValue: '', description: 'enter solution name')
+        string(name: 'DLL_NAME', defaultValue: '', description: 'Enter dll filename')
+        string(name: 'IMAGE_NAME', defaultValue: '', description:'enter image name')
+        string(name: 'USER_NAME', defaultValue: 'username', description:'Enter dockerhub user name')
+        string(name: 'TAG_NAME', defaultValue: 'Enter tag  name', description:'Enter tag  name')
+        string(name: 'PORT', defaultValue: '1234', description:'Which Port You want to run')
     }
         stages {
             stage('Build') {
@@ -60,7 +60,7 @@ pipeline {
             stage('Run') {
                 steps {
                     powershell('echo Job Trying to run')
-                    powershell('docker run -p ${env:PORT}:80 ${env:USER_NAME}/${env:IMAGE_NAME}:${env:TAG_NAME}')
+                    powershell('docker run -p ${env:PORT}:80 ${env:USER_NAME}/${env:IMAGE_NAME}:${env:TAG_NAME} ${env:DLL_NAME}')
                     powershell("echo Job Running....")
                 }
             }    
