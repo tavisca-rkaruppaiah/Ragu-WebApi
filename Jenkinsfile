@@ -25,6 +25,7 @@ pipeline {
 				bat "${sqScannerMsBuildHome}\\SonarQube.Scanner.MSBuild.dll begin /k:${env:JOB_KEY}"
       				bat "${sqScannerMsBuildHome}\\SonarQube.Scanner.MSBuild.dll end"
 			}
+		   }
                 }
             }
             stage('Test') {
