@@ -43,7 +43,7 @@ pipeline {
                         powershell("echo Pushing to docker")
                      withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'username',  passwordVariable: 'password')]) {                    
                         powershell ( 'echo Docker login')
-                        powershell ( 'docker login -u $username -p $password' )  
+                        powershell ( 'docker login -u username -p password' )  
                         powershell ('echo $username')
                         powershell('docker push $username/${env:IMAGE_NAME}:${env:TAG_NAME}')
                         powershell("echo Successfully Pushed")
