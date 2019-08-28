@@ -33,8 +33,7 @@ pipeline {
             stage('Build Docker'){
                 steps{
                         powershell('echo building docker ...')
-                        powershell('docker build -t ${env:IMAGE_NAME} --build-arg DLL_FILE=${env:DLL_NAME} .')
-                        powershell('echo dll name passed')
+                        powershell('docker build -t ${env:IMAGE_NAME} .')
                 }
             }
             stage('Create TagName'){
@@ -62,7 +61,7 @@ pipeline {
             stage('Run') {
                 steps {
                     powershell('echo Job Trying to run')
-                    powershell('docker run --rm -p ${env:PORT}:80 -e DLL_NAME_FILE=${env:DLL_NAME} -td ${env:USER_NAME}/${env:IMAGE_NAME}:${env:TAG_NAME}')
+                    powershell('docker run -p ${env:PORT}:80 ${env:USER_NAME}/${env:IMAGE_NAME}:${env:TAG_NAME} ${env:DLL_NAME}')
                     powershell("echo Job Running....")
                 }
             }    
