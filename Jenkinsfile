@@ -22,7 +22,7 @@ pipeline {
                    script{
 			withSonarQubeEnv ('SonarQubeServer'){
 				withCredentials([usernamePassword(credentialsId: '1655b59e-d5c6-4a4f-aad5-811cc94b3c04', passwordVariable: 'password', usernameVariable: 'username')]){
-					bat 'dotnet %SonarScanner% begin /key:%projectKey% /d:sonar.login=%username% /d:sonar.password=%password%'
+					bat 'dotnet %SonarScanner% begin /key:%JOB_KEY% /d:sonar.login=%username% /d:sonar.password=%password%'
 					bat 'dotnet %SonarScanner% end /d:sonar.login=%username% /d:sonar.password=%password%'
 						}
 					}
