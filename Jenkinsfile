@@ -1,12 +1,12 @@
 pipeline {
     agent any 
     parameters{
-        string(name: 'SOLUTION_NAME', defaultValue: '', description: 'enter solution name')
-        string(name: 'DLL_NAME', defaultValue: '', description: 'Enter dll filename')
-	string(name: 'JOB_KEY', defaultValue: '', description: 'Enter Project key For SonarQube')
-        string(name: 'IMAGE_NAME', defaultValue: '', description:'enter image name')
-        string(name: 'USER_NAME', defaultValue: 'username', description:'Enter dockerhub user name')
-        string(name: 'TAG_NAME', defaultValue: 'Enter tag  name', description:'Enter tag  name')
+        string(name: 'SOLUTION_NAME', defaultValue: 'WebApi', description: 'enter solution name')
+        string(name: 'DLL_NAME', defaultValue: 'WebApi.dll', description: 'Enter dll filename')
+	string(name: 'JOB_KEY', defaultValue: 'Ragu-Web', description: 'Enter Project key For SonarQube')
+        string(name: 'IMAGE_NAME', defaultValue: 'webimage', description:'enter image name')
+        string(name: 'USER_NAME', defaultValue: 'imra35', description:'Enter dockerhub user name')
+        string(name: 'TAG_NAME', defaultValue: 'TagNew', description:'Enter tag  name')
         string(name: 'PORT', defaultValue: '1234', description:'Which Port You want to run')
     }
         stages {
