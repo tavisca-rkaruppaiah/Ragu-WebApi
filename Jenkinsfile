@@ -37,7 +37,7 @@ pipeline {
             }
             stage('Login to Docker'){
                 steps{
-                    withCredentials([usernamePassword(credentialsId: 'docker', passwordVariable: 'password', usernameVariable: 'username')]) {                    
+                    withCredentials([usernamePassword(credentialsId: 'docker',, usernameVariable: 'username',  passwordVariable: 'password')]) {                    
                         powershell ( 'echo Docker login')
                         powershell ( 'docker login -u %username% -p %password% ' )      
                     }   
