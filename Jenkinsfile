@@ -16,6 +16,18 @@ pipeline {
                         powershell("echo Build Completed")
                     }
             }
+            stage('SonarQube') {
+                steps {
+                    powershell('echo SonarQube Executing')
+                    withSonarQubeEnv ('SonarQubeServer'){
+						withCredentials([usernamePassword(credentialsId: '1655b59e-d5c6-4a4f-aad5-811cc94b3c04', passwordVariable: 'password', 
+                                                          usernameVariable: 'username')]){
+                            bat ('dotnet %SonarScanner% begin /key:%jopkey% /d:sonar.login=%username% /d:sonar.password=%password%')
+                            bat ('dotnet %SonarScanner% end /d:sonar.login=%username% /d:sonar.password=%password%')
+                        }
+                    }
+                }
+            }
             stage('Test') {
                 steps {
                     powershell("echo Testing ....")
