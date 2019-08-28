@@ -20,9 +20,9 @@ pipeline {
             stage('SonarQube') {
                 steps {
 			powershell('echo SonarQube Begining')
-			powershell('dotnet %SONARQUBE_PATH% begin /k:"${env:JOB_KEY}" /d:sonar.host.url="%SONARQUBE_URL%" /d:sonar.login="c0ba85fe29f1f197faf236bdccd15e491a6c91a6"')
+			powershell('dotnet C:/Users/rkaruppaiah/Downloads/sonar-scanner-msbuild-4.6.2.2108-netcoreapp2.0/SonarScanner.MSBuild.dll begin /k:"${env:JOB_KEY}" /d:sonar.host.url="%SONARQUBE_URL%" /d:sonar.login="c0ba85fe29f1f197faf236bdccd15e491a6c91a6"')
 			powershell('echo SonarQube Ending')
-			powershell('dotnet %SONARQUBE_PATH% end /d:sonar.login="c0ba85fe29f1f197faf236bdccd15e491a6c91a6"')
+			powershell('dotnet C:/Users/rkaruppaiah/Downloads/sonar-scanner-msbuild-4.6.2.2108-netcoreapp2.0/SonarScanner.MSBuild.dll end /d:sonar.login="c0ba85fe29f1f197faf236bdccd15e491a6c91a6"')
 		}
             }
             stage('Test') {
