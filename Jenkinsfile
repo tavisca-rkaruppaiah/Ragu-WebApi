@@ -22,9 +22,9 @@ pipeline {
                    script{
 			def sqScannerMsBuildHome = tool 'SonarqubeScanner'
 			withSonarQubeEnv ('SonarQubeServer'){
-				bat "${sonarcube_msbuild} begin /k:"${env:JOB_KEY}" /d:sonar.host.url=${sonarcube_url} /d:sonar.login="${sonarcube_key}""
+				bat '${sonarcube_msbuild} begin /k:"${env:JOB_KEY}" /d:sonar.host.url=${sonarcube_url} /d:sonar.login="${sonarcube_key}"'
 				bat "dotnet build"
-      				bat "${sonarcube_msbuild} end /d:sonar.login=$"{sonarcube_key}""
+      				bat '${sonarcube_msbuild} end /d:sonar.login=$"{sonarcube_key}"'
 			}
 		   }
                 }
