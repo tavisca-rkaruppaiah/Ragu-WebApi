@@ -3,6 +3,7 @@ pipeline {
     parameters{
         string(name: 'SOLUTION_NAME', defaultValue: '', description: 'enter solution name')
         string(name: 'DLL_NAME', defaultValue: '', description: 'Enter dll filename')
+	string(name: 'JOB_KEY', defaultValue: '', description: 'Enter Project key For SonarQube')
         string(name: 'IMAGE_NAME', defaultValue: '', description:'enter image name')
         string(name: 'USER_NAME', defaultValue: 'username', description:'Enter dockerhub user name')
         string(name: 'TAG_NAME', defaultValue: 'Enter tag  name', description:'Enter tag  name')
@@ -20,9 +21,8 @@ pipeline {
                 steps {
                     powershell('echo SonarQube Executing')
                     withSonarQubeEnv ('SonarQubeServer'){
-						withCredentials([usernamePassword(credentialsId: '1655b59e-d5c6-4a4f-aad5-811cc94b3c04', passwordVariable: 'password', 
-                                                          usernameVariable: 'username')]){
-                            bat ('dotnet %SonarScanner% begin /key:%jopkey% /d:sonar.login=%username% /d:sonar.password=%password%')
+			withCredentials([usernamePassword(credentialsId: '1655b59e-d5c6-4a4f-aad5-811cc94b3c04', usernameVariable: 'username', passwordVariable: 'password' )]){
+                            bat ('dotnet %SonarScanner% begin /key:%JOB_KEY% /d:sonar.login=%username% /d:sonar.password=%password%')
                             bat ('dotnet %SonarScanner% end /d:sonar.login=%username% /d:sonar.password=%password%')
                         }
                     }
