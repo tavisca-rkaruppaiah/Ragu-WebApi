@@ -19,13 +19,10 @@ pipeline {
             }
             stage('SonarQube') {
                 steps {
-		bat '''
-					dotnet ${sonar_msbuild}  begin /k:"Ragu-Web" /d:sonar.host.url=${sonar_url} /d:sonar.login="c0ba85fe29f1f197faf236bdccd15e491a6c91a6"
-					dotnet build
-					dotnet ${sonar_msbuild} end /d:sonar.login="c0ba85fe29f1f197faf236bdccd15e491a6c91a6"
-					
-			'''
-                }
+			powershell('echo SonarQube Begining')
+			powershell('${SONARQUBE_PATH} begin /k:"${JOB_KEY}" /d:sonar.host.url="${SONARQUBE_URL}" /d:sonar.login="72275f1554693b285a63b0619970566c500cb5ef"' ')
+			powershell('${SONARQUBE_PATH} end /d:sonar.login="72275f1554693b285a63b0619970566c500cb5ef"' ')
+
             }
             stage('Test') {
                 steps {
