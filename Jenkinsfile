@@ -19,11 +19,12 @@ pipeline {
             }
             stage('SonarQube') {
                 steps {
-											bat '''
-														${sonarcube_msbuild} begin /k:"${env:JOB_KEY}" /d:sonar.host.url=${sonarcube_url} /d:sonar.login="${sonarcube_key}"
-														dotnet build
-														${sonarcube_msbuild} end /d:sonar.login=$"{sonarcube_key}"
-												'''
+		bat '''
+					dotnet ${sonarcube_msbuild} begin /k:"${env:JOB_KEY}" /d:sonar.host.url=${sonarcube_url} /d:sonar.login="${sonarcube_key}"
+					dotnet build
+					dotnet ${sonarcube_msbuild} end /d:sonar.login=$"{sonarcube_key}"
+					
+			'''
                 }
             }
             stage('Test') {
