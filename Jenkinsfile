@@ -19,12 +19,12 @@ pipeline {
             }
             stage('SonarQube') {
                 steps {
-		bat """
+		bat '''
 					dotnet ${sonar_msbuild}  begin /k:"Ragu-Web" /d:sonar.host.url=${sonar_url} /d:sonar.login="c0ba85fe29f1f197faf236bdccd15e491a6c91a6"
 					dotnet build
 					dotnet ${sonar_msbuild} end /d:sonar.login="c0ba85fe29f1f197faf236bdccd15e491a6c91a6"
 					
-			"""
+			'''
                 }
             }
             stage('Test') {
