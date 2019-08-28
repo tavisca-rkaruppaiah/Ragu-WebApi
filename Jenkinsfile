@@ -19,12 +19,12 @@ pipeline {
             }
             stage('SonarQube') {
                 steps {
-		bat '''
-					dotnet ${sonarcube_msbuild} begin /k:"${env:JOB_KEY}" /d:sonar.host.url=${sonarcube_url} /d:sonar.login="${sonarcube_key}"
+		bat """
+					dotnet C:\Users\rkaruppaiah\Downloads\sonar-scanner-msbuild-4.6.2.2108-netcoreapp2.0\SonarScanner.MSBuild.dll  begin /k:"Ragu-Web" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="c0ba85fe29f1f197faf236bdccd15e491a6c91a6"
 					dotnet build
-					dotnet ${sonarcube_msbuild} end /d:sonar.login=$"{sonarcube_key}"
+					dotnet C:\Users\rkaruppaiah\Downloads\sonar-scanner-msbuild-4.6.2.2108-netcoreapp2.0\SonarScanner.MSBuild.dll end /d:sonar.login="c0ba85fe29f1f197faf236bdccd15e491a6c91a6"
 					
-			'''
+			"""
                 }
             }
             stage('Test') {
