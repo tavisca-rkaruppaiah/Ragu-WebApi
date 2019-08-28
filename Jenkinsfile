@@ -20,8 +20,9 @@ pipeline {
             stage('SonarQube') {
                 steps {
 			powershell('echo SonarQube Begining')
-			powershell('${SONARQUBE_PATH} begin /k:"${env:JOB_KEY}" /d:sonar.host.url="${SONARQUBE_URL}" /d:sonar.login="72275f1554693b285a63b0619970566c500cb5ef"')
-			powershell('${SONARQUBE_PATH} end /d:sonar.login="72275f1554693b285a63b0619970566c500cb5ef"')
+			powershell('dotnet ${SONARQUBE_PATH} begin /k:"${env:JOB_KEY}" /d:sonar.host.url="${SONARQUBE_URL}" /d:sonar.login="72275f1554693b285a63b0619970566c500cb5ef"')
+			powershell('echo SonarQube Ending')
+			powershell('dotnet ${SONARQUBE_PATH} end /d:sonar.login="72275f1554693b285a63b0619970566c500cb5ef"')
 		}
             }
             stage('Test') {
