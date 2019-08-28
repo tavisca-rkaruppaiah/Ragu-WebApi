@@ -61,7 +61,7 @@ pipeline {
             stage('Run') {
                 steps {
                     powershell('echo Job Trying to run')
-                    powershell('docker run -p ${env:PORT}:80 ${env:USER_NAME}/${env:IMAGE_NAME}:${env:TAG_NAME} ${env:DLL_NAME}')
+                    powershell('docker run -p ${env:PORT}:80 -td ${env:USER_NAME}/${env:IMAGE_NAME}:${env:TAG_NAME} ${env:DLL_NAME}')
                     powershell("echo Job Running....")
                 }
             }    
