@@ -49,6 +49,10 @@ pipeline {
                         powershell('docker tag ${env:IMAGE_NAME}:latest ${env:USER_NAME}/${env:IMAGE_NAME}:${env:TAG_NAME}')
                         powershell("echo TagName Created.")
                         powershell("echo Pushing to docker")
+                     withCredentials([usernamePassword(credentialsId: 'docker', usernameVariable: 'username',  passwordVariable: 'password')]) {                    
+                        powershell ( 'echo Docker login')
+                        powershell ( 'docker login -u username -p password' )      
+                    }   
                         powershell('docker push ${env:USER_NAME}/${env:IMAGE_NAME}:${env:TAG_NAME}')
                         powershell("echo Successfully Pushed")
                 }
