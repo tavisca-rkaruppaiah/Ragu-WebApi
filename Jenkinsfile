@@ -22,11 +22,11 @@ pipeline {
             stage('SonarQube') {
                 steps {
 			powershell('echo SonarQube Begining')
-			powershell('dotnet ${env:SONAR_SCANNER} begin /k:"${env:JOB_KEY}" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="${PROJECT_KEY}"')
+			powershell('dotnet ${env:SONAR_SCANNER} begin /k:"${env:JOB_KEY}" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="${env:PROJECT_KEY}"')
 			powershell('echo sonarqube begin started')
 			powershell('dotnet build')
 			powershell('echo SonarQube Ending')
-			powershell('dotnet ${env:SONAR_SCANNER} end /d:sonar.login="${PROJECT_KEY}"')
+			powershell('dotnet ${env:SONAR_SCANNER} end /d:sonar.login="${env:PROJECT_KEY}"')
 			powershell('echo sonarqube ended')
 		}
             }
